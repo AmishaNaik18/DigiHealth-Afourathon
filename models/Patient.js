@@ -12,12 +12,27 @@ const healthRecordSchema = new Schema({
 const surgerySchema = new Schema({
     doctor: SchemaTypes.ObjectId,
     surgeryType: String,
-    date: Date
-})
+    date: Date,
+    fees: Number
+});
+const checkupSchema = new Schema({
+    doctor: SchemaTypes.ObjectId,
+    checkupType: String,
+    date: Date,
+    fees: Number
+});
 const patientSchema = new Schema({
     regDate: {
         type: Date,
         default : () => Date.now(),
+    },
+    username:{
+        type: String,
+        required: true
+    },
+    password:{
+        type: String,
+        required : true
     },
     name: {
         type: String,
@@ -37,6 +52,7 @@ const patientSchema = new Schema({
         type: healthRecordSchema,
         default: () => ({})
     },
+    checkup: [checkupSchema],
     surgery: [surgerySchema]
 });
 const Patient = models.patientSchema || model('Patient', patientSchema);
