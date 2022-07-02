@@ -22,18 +22,6 @@ const checkupSchema = new Schema({
     fees: Number
 });
 const patientSchema = new Schema({
-    regDate: {
-        type: Date,
-        default : () => Date.now(),
-    },
-    username:{
-        type: String,
-        required: true
-    },
-    password:{
-        type: String,
-        required : true
-    },
     name: {
         type: String,
         required: true
