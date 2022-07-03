@@ -1,6 +1,7 @@
 import React from 'react'
+import { MongoClient, ObjectId } from 'mongodb';
 
-const doctorid = () => {
+const doctorid = (props) => {
   return (
    
       <div className="relative bg-white overflow-hidden max-h-screen">
@@ -174,7 +175,7 @@ const doctorid = () => {
                         <div className="p-4 bg-[#E5E4E2] rounded-xl">
                           <div className="font-bold text-xl text-gray-800 leading-none">
                             Good day, <br />
-                            Doctor name
+                            {props.doctorData.name}
                           </div>
                           <div className="mt-5">
                             <button
@@ -289,5 +290,63 @@ const doctorid = () => {
     </div>
   );
 }
+
+export async function getStaticPaths()
+{
+  try{
+    const client= await MongoClient.connect('');
+    const db = client.db();
+
+    const doctorsCollection = db.collection('');
+    const doctors = await doctorsCollection.find({},{_id: 1}).toArray();
+
+    return {
+      fallback: true,
+      paths: doctors.map(doctor => ({ params: { doctorid: doctor._id.toString() }}) )
+    }
+  }
+  catch(error){
+    //  console.log('Error');
+     console.log(error);
+  }
+  
+}
+
+export async function getStaticProps(context)
+{
+  try{
+    const doctorId=context.params.doctorid;
+    console.log(doctorId)
+
+    const client= await MongoClient.connect('');
+    const db = client.db();
+
+    const doctorsCollection = db.collection('');
+    const selectedDoctor = await doctorsCollection.findOne({_id: ObjectId(doctorId)})
+
+    console.log(selectedDoctor);
+
+    return{
+      props: {
+        doctorData: {
+          id: selectedDoctor._id.toString(),
+          name: selectedDoctor.name,
+          age: selectedDoctor.age,
+          specialisation: selectedDoctor.specialisation,
+        }
+      }
+    }
+  }
+  catch(error)
+  {
+    //  console.log('Props Error');
+     console.log(error);
+     return {
+      props: {}
+    }
+  }
+ 
+}
+
 
 export default doctorid
