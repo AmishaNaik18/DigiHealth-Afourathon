@@ -1,8 +1,11 @@
 
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 
 const Home=() => {
+  const {data:session} =useSession();
+  console.log(session);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
