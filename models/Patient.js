@@ -43,5 +43,5 @@ const patientSchema = new Schema({
     checkup: [checkupSchema],
     surgery: [surgerySchema]
 });
-const Patient = models.patientSchema || model('Patient', patientSchema);
+const Patient = models.Patient || model('Patient', patientSchema);
 export default Patient;

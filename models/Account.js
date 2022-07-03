@@ -16,5 +16,5 @@ const accountSchema = new Schema({
     _nurse : {type: Schema.Types.ObjectId, ref: 'Nurse'},
     _patient : {type: Schema.Types.ObjectId, ref: 'Patient'},
 });
-const Account = models.accountSchema || model('Account',accountSchema);
+const Account = models.Account || model('Account',accountSchema);
 export default Account;
