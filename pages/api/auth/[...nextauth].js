@@ -1,7 +1,48 @@
 import NextAuth from "next-auth"
 import  CredentialsProvider  from "next-auth/providers/credentials"
-import { HOST_URL } from "../../../utils/appData";
-import connectMongo from "../../../utils/connectMongo"
+import Account from "../../../models/Account";
+import Doctor from "../../../models/Doctor";
+import Nurse from "../../../models/Nurse";
+import Patient from "../../../models/Patient";
+import connectMongo from "../../../utils/connectMongo";
+
+
+const dbLookUp =async (req) => {
+  await connectMongo();
+  const account = await Account.findOne({ username: req.username });
+    if (account !== null){
+      if (account.password === req.password) {
+        if (account._doctor) {
+          const doctor = await Doctor.findById(account._doctor);
+          return{
+            id: doctor._id,
+            name: doctor.name,
+            role: "doctor",
+          };
+        }
+        if (account._nurse) {
+          const nurse =await Nurse.findById(account._nurse);
+          return {
+            id: nurse._id,
+            name: nurse.name,
+            role: "nurse",
+          };
+        }
+        if (account._patient) {
+          const patient = await Patient.findById(account._patient).exec();
+          return  {
+            id: patient._id,
+            name: patient.name,
+            role: "patient"
+          };
+        }
+      }
+    }
+    else{
+      return null;
+    }  
+  }
+
 export default NextAuth({
 providers: [
   CredentialsProvider({
@@ -13,12 +54,8 @@ providers: [
       password: {  label: "Password", type: "password" }
     },
     async authorize(credentials, req) {
-      const res = await fetch(`${HOST_URL}/api/auth/dblookup`, {
-        method: 'POST', 
-        body: JSON.stringify(credentials),
-        headers: { "Content-Type": "application/json" }
-      });
-      const user = await res.json()
+
+      const user = await dbLookUp(credentials);
       return user;
       // If no error and we have user data, return it
       // Return null if user data could not be retrieved

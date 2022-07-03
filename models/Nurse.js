@@ -6,5 +6,5 @@ const nurseSchema = new Schema({
     },
     age: Number
 });
-const Nurse = models.nurseSchema || model('Nurse',nurseSchema);
+const Nurse = models.Nurse || model('Nurse',nurseSchema);
 export default Nurse;

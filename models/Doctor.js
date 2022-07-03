@@ -8,5 +8,5 @@ const doctorSchema = new Schema({
     specialisation : [String],
     age: Number
 });
-const Doctor = models.doctorSchema || model('Doctor',doctorSchema);
+const Doctor = models.Doctor || model('Doctor',doctorSchema);
 export default Doctor;
