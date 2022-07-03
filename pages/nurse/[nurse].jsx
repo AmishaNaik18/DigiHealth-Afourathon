@@ -1,8 +1,11 @@
 import React from 'react'
 
 const [nurse] = () => {
+  // return (
+  //   <div>[nurse]</div>
+  // )
   return (
-    <div>[nurse]</div>
+    <div>Nurse</div>
   )
 }
 
