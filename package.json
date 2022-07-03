@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "mongodb": "^4.7.0",
     "mongoose": "^6.4.1",
     "next": "^12.1.6",
     "next-auth": "^4.8.0",
