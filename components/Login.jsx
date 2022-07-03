@@ -1,6 +1,5 @@
 import { signIn } from 'next-auth/react';
 import { React, useState, Fragment } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseMedical } from '@fortawesome/free-solid-svg-icons';
 
@@ -38,9 +37,10 @@ const Login = () => {
 				<div className='w-full flex flex-wrap'>
 					<div className='w-full md:w-1/2 flex flex-col'>
 						<div className='flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24'>
-							<a href='#' className='bg-black text-white font-bold text-xl p-4'>
-								<FontAwesomeIcon icon={faHouseMedical} />
-							</a>
+							<FontAwesomeIcon
+								className='bg-black text-white font-bold text-xl p-4'
+								icon={faHouseMedical}
+							></FontAwesomeIcon>
 						</div>
 
 						<div className='flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32'>
@@ -79,7 +79,6 @@ const Login = () => {
 										}}
 									></input>
 								</div>
-
 								<input
 									type='submit'
 									value='Log In'
