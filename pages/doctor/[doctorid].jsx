@@ -1,5 +1,6 @@
 import React from 'react'
-import { MongoClient, ObjectId } from 'mongodb';
+import connectMongo from '../../utils/connectMongo'
+import Doctor from '../../models/Doctor';
 
 const doctorid = (props) => {
   return (
@@ -291,38 +292,13 @@ const doctorid = (props) => {
   );
 }
 
-export async function getStaticPaths()
-{
-  try{
-    const client= await MongoClient.connect('');
-    const db = client.db();
 
-    const doctorsCollection = db.collection('');
-    const doctors = await doctorsCollection.find({},{_id: 1}).toArray();
-
-    return {
-      fallback: true,
-      paths: doctors.map(doctor => ({ params: { doctorid: doctor._id.toString() }}) )
-    }
-  }
-  catch(error){
-    //  console.log('Error');
-     console.log(error);
-  }
-  
-}
-
-export async function getStaticProps(context)
+export async function getServerSideProps(context)
 {
   try{
     const doctorId=context.params.doctorid;
-    console.log(doctorId)
-
-    const client= await MongoClient.connect('');
-    const db = client.db();
-
-    const doctorsCollection = db.collection('');
-    const selectedDoctor = await doctorsCollection.findOne({_id: ObjectId(doctorId)})
+    await connectMongo();
+    const selectedDoctor = await Doctor.findById(doctorId);
 
     console.log(selectedDoctor);
 
