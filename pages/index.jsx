@@ -2,10 +2,30 @@
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Home=() => {
-  const {data:session} =useSession();
+  const { data: session, status } = useSession()
   console.log(session);
+  const router = useRouter();
+  useEffect(()=>{
+    if (status === "authenticated")
+    {
+      if(session.role == 'doctor')
+    {
+      router.push(`/doctor/${session.id}`)
+    }
+    else if (session.role == 'nurse')
+    {
+      router.push(`/nurse/${session.id}`)
+    }
+    else if (session.role == 'patient')
+    {
+      router.push(`/patient/${session.id}`)
+    }
+    }
+  },[session,status])
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
