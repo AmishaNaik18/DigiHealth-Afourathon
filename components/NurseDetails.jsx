@@ -1,24 +1,14 @@
 import React from 'react'
-import patients from '../doctor/[doctorid]/patients'
-import Link from 'next/link'
-const nurse = () => {
-  const props = [
-      {
-        name: "Anushka SHral",
-        age: 8,
-        id: 122,
-        sex: "male",
-      },
-      {
-        name: "Anushka SHral",
-        age: 8,
-        id: 122,
-        sex: "male",
-      },
-
-  ];
-  return props.map((p)=>{
-    return (<div>
+import Link from "next/link";
+import { useState } from "react";
+const NurseDetails = ({nurse}) => {
+    const [patients, setPatients] = useState(nurse.patients);
+    const RemoveItem = (e) => {
+      //change in db
+      console.log(e)
+      setPatients(patients.filter((item) => item.id !== e));console.log(patients);
+    };
+  return (     <div>
                 <div className="testimonial-1 py-4 md:py-12 mx-4  ">
                   <div className="container mx-auto px-4 overflow-y-auto h-50 border-2 border-solid hover:border-black">
                     <div className=" mb-4 ">
@@ -32,14 +22,21 @@ const nurse = () => {
                             />
                           </div>
                           <div>
-                            <h1 className="text-xl font-bold">{p.name}</h1>
+                            <h1 className="text-xl font-bold">{nurse.name}</h1>
                             <div className="text-gray-900 font-bold uppercase mt-6">
-                              Age : {p.age}
+                              Age : {nurse.age}
                             </div>
                           </div>
                         </div>
-                       
-                        
+                        <div className="text-gray-600 m-1 p-1 font-semibold  border-b border-gray-200">
+                          Current Patients
+                        </div>
+                        {patients&&patients.length&&patients.map((p) => {
+                          return (
+                            <div className="flex h-16 " key={p.id}>
+                              <div className="w-1/2 text-left m-1 p-1 bg-[#E5E4E2] text-center leading-8 rounded-lg border border-gray-200">
+                                {p.name}
+                              </div>
                               <Link href={`/patient/${p.id}`}>
                                 <button
                                   type="button"
@@ -48,15 +45,22 @@ const nurse = () => {
                                   View health records
                                 </button>
                               </Link>
-                             
+                              <button
+                                name={p.id}
+                                onClick={() => RemoveItem(p.id)}
+                              >
+                                <img src="/wrong.png" className="m-2 rounded-xl w-6 h-6"></img>
+                              </button>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            )
-          })
+            );
   
 }
 
-export default nurse
+export default NurseDetails
