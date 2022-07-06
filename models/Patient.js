@@ -21,6 +21,19 @@ const checkupSchema = new Schema({
     date: Date,
     fees: Number
 });
+const medicineSchema = new Schema({
+    medicine: String,
+    purpose: String,
+    doses: Number,
+});
+const prescriptionSchema = new Schema({
+    medicines: [medicineSchema],
+    doctor: Schema.Types.ObjectId,
+    datePrescribed: {
+        type: Date,
+        default : () => Date.now()
+    }
+})
 const patientSchema = new Schema({
     name: {
         type: String,
@@ -41,7 +54,8 @@ const patientSchema = new Schema({
         default: () => ({})
     },
     checkup: [checkupSchema],
-    surgery: [surgerySchema]
+    surgery: [surgerySchema],
+    prescriptions: [prescriptionSchema]
 });
 const Patient = models.Patient || model('Patient', patientSchema);
 export default Patient;

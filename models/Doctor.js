@@ -6,7 +6,8 @@ const doctorSchema = new Schema({
     },
 
     specialisation : [String],
-    age: Number
+    age: Number,
+    patients: [{type: Schema.Types.ObjectId, ref: 'Patient'}]
 });
 const Doctor = models.Doctor || model('Doctor',doctorSchema);
 export default Doctor;
