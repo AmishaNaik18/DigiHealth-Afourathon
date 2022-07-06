@@ -1,8 +1,8 @@
 import React from "react";
-// import { MongoClient, ObjectId } from "mongodb";
-// import { parseIsolatedEntityName } from "typescript";
+import connectMongo from "./../../../utils/connectMongo"
+import Doctor from "../../../models/Doctor";
 import Link from "next/link"
-const doctorid = () => {
+const doctorid = (props) => {
   const doctorNurseTestData = [
     {
       name: "ABC",
@@ -41,12 +41,10 @@ const doctorid = () => {
         name:"Anushka",
         doctorid:1
     }
-  const props = {
-    doctorData,
-    surgeryData,
-    doctorPatientTestData,
-    doctorNurseTestData
-  }
+  // const props = {
+  //   doctorData,
+  //   surgeryData,
+  // }
   return (
     <div className="relative bg-white overflow-hidden max-h-screen">
       <aside className="fixed inset-y-0 left-0 bg-[#E5E4E2] shadow-md max-h-screen w-60">
@@ -243,13 +241,13 @@ const doctorid = () => {
                     </div>
                     <div className="p-4 bg-[#E5E4E2] rounded-xl text-gray-800">
                       <div className="font-bold text-2xl leading-none">
-                        {surgeryData.length}
+                        {/* {surgeryData.length} */}
                       </div>
                       <div className="mt-2">Surgeries</div>
                     </div>
                     <div className="p-4 bg-[#E5E4E2] rounded-xl text-gray-800">
                       <div className="font-bold text-2xl leading-none">
-                        {props.doctorPatientTestData.length}
+                        {props.doctorData.patients.length}
                       </div>
                       <div className="mt-2">Track Patient's health</div>
                     </div>
@@ -351,58 +349,35 @@ const doctorid = () => {
   );
 };
 
-// export async function getStaticPaths() {
-//   try {
-//     const client = await MongoClient.connect("");
-//     const db = client.db();
+export async function getServerSideProps(context)
+{
+  try{
+    const doctorId=context.params.doctorid;
+    await connectMongo();
+    const selectedDoctor = await Doctor.findById(doctorId);
 
-//     const doctorsCollection = db.collection("");
-//     const doctors = await doctorsCollection.find({}, { _id: 1 }).toArray();
-
-//     return {
-//       fallback: true,
-//       paths: doctors.map((doctor) => ({
-//         params: { doctorid: doctor._id.toString() },
-//       })),
-//     };
-//   } catch (error) {
-//     //  console.log('Error');
-//     console.log(error);
-//   }
-// }
-
-// export async function getStaticProps(context) {
-//   try {
-//     const doctorId = context.params.doctorid;
-//     console.log(doctorId);
-
-//     const client = await MongoClient.connect("");
-//     const db = client.db();
-
-//     const doctorsCollection = db.collection("");
-//     const selectedDoctor = await doctorsCollection.findOne({
-//       _id: ObjectId(doctorId),
-//     });
-
-//     console.log(selectedDoctor);
-
-//     return {
-//       props: {
-//         doctorData: {
-//           id: selectedDoctor._id.toString(),
-//           name: selectedDoctor.name,
-//           age: selectedDoctor.age,
-//           specialisation: selectedDoctor.specialisation,
-//         },
-//       },
-//     };
-//   } catch (error) {
-//     //  console.log('Props Error');
-//     console.log(error);
-//     return {
-//       props: {},
-//     };
-//   }
-// }
-
+    console.log(selectedDoctor);
+    return{
+      props: {
+        doctorData: //JSON.parse(JSON.stringify(selectedDoctor)), // to parse the nested patients object in doctor model which returns a non deserializable object
+        {
+          doctorid: selectedDoctor._id.toString(),
+          name: selectedDoctor.name,
+          age: selectedDoctor.age,
+          patients: selectedDoctor.patients.map(s => s.toString()),
+          specialisation: selectedDoctor.specialisation,
+        }
+      }
+    }
+  }
+  catch(error)
+  {
+    //  console.log('Props Error');
+     console.log(error);
+     return {
+      props: {}
+    }
+  }
+ 
+}
 export default doctorid;
