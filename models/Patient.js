@@ -22,7 +22,7 @@ const checkupSchema = new Schema({
     fees: Number
 });
 const medicineSchema = new Schema({
-    medicine: String,
+    name: String,
     purpose: String,
     doses: Number,
 });

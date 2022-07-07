@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from "react";
+const axios = require('axios').default;
 
-const PrescribePatient = ({props}) => {
+const PrescribePatient = (props) => {
   const [prescribe, setPrescibe] = useState(false);
   const [medicine,setMedicine] = useState({
     name:"",
@@ -10,7 +11,7 @@ const PrescribePatient = ({props}) => {
     active:false
   })
 
-  const medicineAdd=()=>{
+  const medicineAdd=async ()=>{
    
      console.log(medicine);
      if (
@@ -19,7 +20,15 @@ const PrescribePatient = ({props}) => {
        medicine.purpose === "" ||
        medicine.doses === ""
      )
-       return;
+     try {
+      await axios.post('/api/doctors/prescribemedicine',{
+        doctor: props.doctorId,
+        patient: props.patient,
+        medicines: medicine
+       });
+     } catch (error) {
+      console.log("could not add medicine", error);
+     }
      //add in db
      setMedicine({ name: "", doses: "", purpose: "", active: "" });
     setPrescibe(!prescribe);
