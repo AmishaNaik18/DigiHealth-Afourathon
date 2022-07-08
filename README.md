@@ -24,6 +24,9 @@ You are expected to imagine a company with the challenges/assumptions for your p
 <img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925727-3a684582-e86f-44cf-967c-b8375aff43c2.png">
 <img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925894-e4e36f77-b0ae-4f33-9359-0c6c08a32435.png">
 
-
-
+## STEPS TO RUN:
+1) Clone/pull this repo
+2) Run ```npm install``` to install the required packages
+3) Run ```npm run dev``` to run the app in development mode
+4) Conversely run ```npm run build``` and ```npm run start``` to run a production build
 
