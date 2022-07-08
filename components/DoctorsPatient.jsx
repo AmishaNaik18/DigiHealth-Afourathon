@@ -1,6 +1,4 @@
-import React from 'react'
-
-;
+import React from 'react';
 import PrescribePatient from './PrescribePatient';
 
 const DoctorsPatient = ({props}) => {
@@ -59,8 +57,8 @@ const DoctorsPatient = ({props}) => {
                               </button>
                             </div>
                           )}
-
-                          <PrescribePatient props={props} />
+                         { console.log(p)}
+                          <PrescribePatient patient={p} doctorId={props.doctorId} />
                         </div>
                       </div>
                     </div>

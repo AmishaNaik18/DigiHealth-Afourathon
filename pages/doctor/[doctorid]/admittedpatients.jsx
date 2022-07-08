@@ -40,11 +40,11 @@ const patients = (props) => {
       id: 12,
     },
   ];
-  const patients = props.patients;
+
   const xprops = {
-    patients : patients,
+    patients : props.patients,
     nurses,
-    doctorId:1
+    doctorId: props.doctorId
   };
   return (
     <DoctorsPatient props = {xprops}/>
@@ -52,14 +52,12 @@ const patients = (props) => {
 }
 export async function getServerSideProps(context){
   const doctorId = context.params.doctorid;
-  console.log("doctor id ",doctorId);
   var admittedPatients = [];
   try {
     await connectMongo();
   const admissions = await Admission.find({doctor: doctorId, admitted: true});
   for(const admission of admissions){
      const temp = await Patient.findById(admission.patient);
-     console.log(temp)
      admittedPatients.push({
       pid: temp._id.toString(),
       name: temp.name,

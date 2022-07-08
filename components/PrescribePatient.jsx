@@ -13,22 +13,25 @@ const PrescribePatient = (props) => {
 
   const medicineAdd=async ()=>{
    
-     console.log(medicine);
+     console.log(props);
      if (
        medicine.active === "" ||
        medicine.name === "" ||
        medicine.purpose === "" ||
        medicine.doses === ""
      )
+     
      try {
-      await axios.post('/api/doctors/prescribemedicine',{
+      const res = await axios.post('/api/doctors/prescribemedicine',{
         doctor: props.doctorId,
-        patient: props.patient,
+        patient: props.patient.pid,
         medicines: medicine
        });
+       console.log("result ", res);
      } catch (error) {
       console.log("could not add medicine", error);
      }
+     
      //add in db
      setMedicine({ name: "", doses: "", purpose: "", active: "" });
     setPrescibe(!prescribe);
