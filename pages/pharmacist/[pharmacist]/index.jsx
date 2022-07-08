@@ -24,6 +24,12 @@ const pharmacistid = () => {
       id: 1333,
     },
   ];
+  const doctorData = [
+    {
+      name: 'Asd',
+      doctorid: 223,
+    }
+  ]
   const pharmacistData = {
         name:"Anushka",
         pharmacistid:1
@@ -32,7 +38,7 @@ const pharmacistid = () => {
     pharmacistData,
     MedicinesData,
     pharmacistTestData,
-
+    doctorData,
   }
   return (
     <div className="relative bg-white overflow-hidden max-h-screen">
