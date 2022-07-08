@@ -10,7 +10,9 @@ const Home=() => {
   console.log(session);
   const router = useRouter();
   useEffect(()=>{
-    if (status === "authenticated")
+    if(status !== "loading")
+    {
+      if (status === "authenticated")
     {
       if(session.role == 'doctor')
     {
@@ -25,6 +27,10 @@ const Home=() => {
       router.push(`/patient/${session.id}`)
     }
     }
+    else{
+      router.push('/api/auth/signin');
+    }
+    }  
   },[session,status])
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">

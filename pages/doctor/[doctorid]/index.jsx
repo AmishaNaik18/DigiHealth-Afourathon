@@ -2,7 +2,11 @@ import React from "react";
 import connectMongo from "./../../../utils/connectMongo"
 import Doctor from "../../../models/Doctor";
 import Link from "next/link"
+import {signOut } from "next-auth/react"
+import { useRouter } from 'next/router';
+
 const doctorid = (props) => {
+  const router = useRouter();
   const doctorNurseTestData = [
     {
       name: "ABC",
@@ -140,8 +144,15 @@ const doctorid = (props) => {
           </div>
           <div className="p-4">
             <button
+
               type="button"
               className="inline-flex items-center justify-center h-9 px-4 rounded-xl bg-gray-900 text-gray-300 hover:text-white text-sm font-semibold transition"
+              onClick={
+                ()=> {
+                  signOut();
+                  router.push("/");
+                }
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
