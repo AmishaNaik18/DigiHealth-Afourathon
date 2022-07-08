@@ -1,43 +1,44 @@
 import React from 'react'
 import Link from 'next/link'
+import Doctor from './../../../models/Doctor'
+import connectMongo from '../../../utils/connectMongo'
 //This lists all the patients that were or are treated by the doctor
-const patients = () => {
-
-  const props = [
-    {
-      name: "Aushka Sharsha",
-      id: 1,
-      sex: "Male",
-      health_status: "High BP, Low cholestrol................",
-      age: 10,
-    },
-    {
-      name: "Ans",
-      id: 1,
-      sex: "Male",
-      health_status: "High BP, Low cholestrol................",
-      age: 10,
-    },
-    {
-      name: "Ans",
-      id: 1,
-      sex: "Male",
-      health_status: "High BP, Low cholestrol................",
-    },
-    {
-      name: "Ans",
-      id: 1,
-      sex: "Male",
-      health_status: "High BP, Low cholestrol................",
-      age: 10,
-    },
-  ];
+const patients = (props) => {
+  // const props = [
+  //   {
+  //     name: "Aushka Sharsha",
+  //     id: 1,
+  //     sex: "Male",
+  //     health_status: "High BP, Low cholestrol................",
+  //     age: 10,
+  //   },
+  //   {
+  //     name: "Ans",
+  //     id: 1,
+  //     sex: "Male",
+  //     health_status: "High BP, Low cholestrol................",
+  //     age: 10,
+  //   },
+  //   {
+  //     name: "Ans",
+  //     id: 1,
+  //     sex: "Male",
+  //     health_status: "High BP, Low cholestrol................",
+  //   },
+  //   {
+  //     name: "Ans",
+  //     id: 1,
+  //     sex: "Male",
+  //     health_status: "High BP, Low cholestrol................",
+  //     age: 10,
+  //   },
+  // ];
   return (
     <div>
       <h1 className="font-bold uppercase my-6 text-black text-center text-xl ">
          Patients
       </h1>
-      {props.map((p) => {
+      {props.patients.map((p) => {
         return (
           <div className="justifiy-center testimonial-1 py-4 md:py-12">
             <div className="container mx-auto px-4">
@@ -75,5 +76,36 @@ const patients = () => {
       })}
     </div>
   );
+}
+export async function getServerSideProps(context)
+{
+  try{
+    const doctorId=context.params.doctorid;
+    await connectMongo();
+    const doctor = await Doctor.findById(doctorId).populate('patients');
+    const patients = doctor.patients.map(p=>{
+      return {
+        name: p.name,
+        id: p._id,
+        sex: p.sex,
+        age: p.age
+      }
+    });
+    
+    return{
+      props: {
+        patients: JSON.parse(JSON.stringify(patients))
+      }
+    }
+  }
+  catch(error)
+  {
+    //  console.log('Props Error');
+     console.log(error);
+     return {
+      props: {}
+    }
+  }
+ 
 }
 export default patients;
