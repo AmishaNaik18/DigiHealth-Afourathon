@@ -1,23 +1,12 @@
-# Next.js + Tailwind CSS Example
+## Afourathon
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+# HEALTH CARE
 
-## Deploy your own
+<img width="960" alt="af1" src="https://user-images.githubusercontent.com/79985801/177846420-9c8bfc81-4277-4db0-a541-adbf2ad28666.PNG">
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+# Problem Statement
+Hospital X has patients visiting for various checkups and some admitted. Hospital X has medical staff tending to patients all the time and need strategy to leverage digital transformation of patient health records, test records, billing, hospital occupancy, medical supplies and availability of doctors for critical surgeries.
+You are expected to imagine a company with the challenges/assumptions for your problem statement and make it a part of your solution.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Database Design
+<img width="583" alt="diagram" src="https://user-images.githubusercontent.com/79985801/177850567-573f4733-8537-42d4-a96e-448e90bfc652.PNG">
