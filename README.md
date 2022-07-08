@@ -10,3 +10,20 @@ You are expected to imagine a company with the challenges/assumptions for your p
 
 ## Database Design
 <img width="583" alt="diagram" src="https://user-images.githubusercontent.com/79985801/177850567-573f4733-8537-42d4-a96e-448e90bfc652.PNG">
+
+## Doctor Page
+<img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925193-2dfee752-cce3-43da-b9f4-00979ea3e0ae.png">
+
+## Nurse Page
+<img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925320-76bca868-8275-462a-903b-585c3e681c3e.png">
+
+## Patient Page
+<img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925480-b87ef4ef-c709-45f9-a07a-aa46a206af2c.png">
+
+## Pharmacist Page
+<img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925727-3a684582-e86f-44cf-967c-b8375aff43c2.png">
+<img width="583" alt="diagram" src="https://user-images.githubusercontent.com/85932899/177925894-e4e36f77-b0ae-4f33-9359-0c6c08a32435.png">
+
+
+
+

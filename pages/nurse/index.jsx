@@ -15,7 +15,7 @@ const index = (props) => {
 
 export async function getServerSideProps(){
   try{
-    const conn=await mongoose.connect('mongodb+srv://rounaknaik8:cXugJcThgSClattb@cluster0.4djaxks.mongodb.net/afourtest?retryWrites=true&w=majority')
+    const conn=await mongoose.connect('')
     const list_of_nurses=await Nurse.find();
 
     //Getting Admitted Patients of Nurses
