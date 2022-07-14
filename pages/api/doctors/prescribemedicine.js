@@ -10,6 +10,9 @@ export default async function addPrescription(req, res) {
             doctor: req.body.doctor,
             datePrescribed: Date.now()
         };
+        if (typeof prescription.medicines === 'object'){
+            prescription.medicines = [prescription.medicines]
+        }
         patient.prescriptions.push(prescription);
         await patient.save();
 		res.status(200).json('Prescription Added');

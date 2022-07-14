@@ -1,22 +1,9 @@
 import React from 'react'
 import patients from '../doctor/[doctorid]/patients'
 import Link from 'next/link'
+import connectMongo from '../../utils/connectMongo';
+import Nurse from '../../models/Nurse';
 const nurse = () => {
-  const props = [
-      {
-        name: "Anushka SHral",
-        age: 8,
-        id: 122,
-        sex: "male",
-      },
-      {
-        name: "Anushka SHral",
-        age: 8,
-        id: 122,
-        sex: "male",
-      },
-
-  ];
   return props.map((p)=>{
     return (<div>
                 <div className="testimonial-1 py-4 md:py-12 mx-4  ">
@@ -58,5 +45,6 @@ const nurse = () => {
           })
   
 }
+
 
 export default nurse

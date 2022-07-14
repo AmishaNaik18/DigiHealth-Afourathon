@@ -13,7 +13,6 @@ const PrescribePatient = (props) => {
 
   const medicineAdd=async ()=>{
    
-     console.log(props);
      if (
        medicine.active === "" ||
        medicine.name === "" ||
@@ -27,7 +26,6 @@ const PrescribePatient = (props) => {
         patient: props.patient.pid,
         medicines: medicine
        });
-       console.log("result ", res);
      } catch (error) {
       console.log("could not add medicine", error);
      }

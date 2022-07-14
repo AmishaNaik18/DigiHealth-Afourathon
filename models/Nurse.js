@@ -4,7 +4,8 @@ const nurseSchema = new Schema({
         type: String,
         required: true
     },
-    age: Number
+    age: Number,
+    sex: String
 });
 const Nurse = models.Nurse || model('Nurse',nurseSchema);
 export default Nurse;

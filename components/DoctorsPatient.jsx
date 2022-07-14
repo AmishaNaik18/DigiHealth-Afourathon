@@ -57,7 +57,6 @@ const DoctorsPatient = ({props}) => {
                               </button>
                             </div>
                           )}
-                         { console.log(p)}
                           <PrescribePatient patient={p} doctorId={props.doctorId} />
                         </div>
                       </div>

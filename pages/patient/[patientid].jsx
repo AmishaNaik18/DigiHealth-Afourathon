@@ -28,10 +28,10 @@ const index = () => {
     ];
   const props = {
     pid:1,
-    age:10,
+    age:45,
     sex:"male",
     name:"Vivek Naik",
-    last_updated:"12-09-2001",
+    last_updated:"12-09-1976",
 
     BP:77,
     height:180,
